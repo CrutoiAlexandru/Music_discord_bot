@@ -1,6 +1,7 @@
 import discord 
 from   discord.ext import commands
 import asyncio
+import discord_bot.on_message as on_message
 
 # connect to the first voice channel the user is connected to
 # at the moment it does not update the channel if the user connected to another
@@ -19,7 +20,6 @@ def voice_channel_connect(client):
             if voice_cl.id != 915971399888289822: 
                 voice_disc = client.voice_clients[0]
                 await voice_disc.disconnect()
-
         except Exception:
             # if we can't get user's voice channel it means he is not connected to a voice channel
             print('user is disconnected from voice')
@@ -37,7 +37,8 @@ def voice_channel_connect(client):
             voice_disc = client.voice_clients[0]
 
             # if the user is not connected to a voice channel disconnect
-            if voice_state == False: await voice_disc.disconnect()
+            if voice_state == False: 
+                await voice_disc.disconnect()
         # do not disconnect if the user is connected and treat the exception
         except Exception:
             print('user is in channel so we do not disconnect')
