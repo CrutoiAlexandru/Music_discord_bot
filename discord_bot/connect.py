@@ -11,6 +11,10 @@ def connect():
     @client.event
     async def on_ready():
         print("Logged in")
+
+    @client.event
+    async def on_voice_state_update(member, before, after):
+        print("voice change")
     
     # listen for messages from users
     on_message.on_message(client)
