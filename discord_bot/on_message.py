@@ -5,10 +5,12 @@ import asyncio
 # list of commands for our bot
 help = '''
     These are my commands: 
-    spot.q    - add song to queue
-    spot.pl   - play a playlist from user(current user is the admin of server)
-    spot.n    - play next song
-    spot.stop - stop streaming
+    m.q    - add song to queue
+    m.pl   - play a playlist from user(current user is the admin of server)
+    m.n    - play next song
+    m.stop - stop streaming
+
+    Also I need to be in a voice channel in order to work, so just connect to one before trying my music related commands.
     '''
 
 # listen for messages from users
@@ -19,8 +21,9 @@ def on_message(client):
         # ignore our own bot's chat
         if message.author == client.user: return 
 
-        # ping command for testing if bot is alive
-        if message.content.startswith("pork"): await message.channel.send("pig")
-
         # command to se our bot help guide
-        if message.content.startswith("spot.help"): await message.channel.send(help)
+        if message.content.startswith("m.help"): await message.channel.send(help)
+
+        # in order to play music check if the bot is connected to a voice channel
+        # otherwise music related commands are redundant
+        if client.voice_clients:

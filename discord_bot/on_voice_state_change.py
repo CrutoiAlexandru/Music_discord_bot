@@ -13,6 +13,13 @@ def voice_channel_connect(client):
         # try to get the user's voice channel
         try:
             voice_cl = member.voice.channel
+
+            # check if the channel id is that of the music channel
+            # if not disconnect from the wrong channel
+            if voice_cl.id != 915971399888289822: 
+                voice_disc = client.voice_clients[0]
+                await voice_disc.disconnect()
+
         except Exception:
             # if we can't get user's voice channel it means he is not connected to a voice channel
             print('user is disconnected from voice')
@@ -28,9 +35,9 @@ def voice_channel_connect(client):
         # try to get the client's voice channel and disconnect from it
         try:    
             voice_disc = client.voice_clients[0]
-            
+
             # if the user is not connected to a voice channel disconnect
-            if voice_state == False:    await voice_disc.disconnect()
+            if voice_state == False: await voice_disc.disconnect()
         # do not disconnect if the user is connected and treat the exception
         except Exception:
             print('user is in channel so we do not disconnect')
