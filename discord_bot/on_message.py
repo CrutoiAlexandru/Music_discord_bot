@@ -2,7 +2,6 @@ import discord
 from   discord.ext import commands
 import asyncio
 import youtube_dl
-import asyncio
 
 # list of commands for our bot
 help = '''
